@@ -2,47 +2,22 @@ from scipy.signal import welch
 import matplotlib.pyplot as plt
 
 
-def calculate_psd(strain, sampling_rate, nperseg=4096):
-    """
-    Calculate the Power Spectral Density (PSD) of a strain signal.
+def calculate_psd(strain, sampling_rate) -> tuple:
 
-    Parameters
-    ----------
-    strain : array-like
-        LIGO strain time-series data.
-    sampling_rate : float
-        Sampling frequency of the strain data in Hz.
-    nperseg : int, optional
-        Length of each segment used by Welch's method.
 
-    Returns
-    -------
-    frequencies : numpy.ndarray
-        Frequencies in Hz.
-    psd : numpy.ndarray
-        Power spectral density in strain²/Hz.
-    """
-
-    frequencies, psd = welch(
-        strain,
-        fs=sampling_rate
-    )
+    frequencies, psd = welch(x = strain, fs = sampling_rate, nperseg = 4096)
 
     return frequencies, psd
 
-def main():
-    # Load your LIGO data
-    from waveprocessing.data.reading import load_strain
 
+def main():
+    from waveprocessing.data.reading import load_strain
     FILE = "data/raw/GW150914_H1.hdf5"
 
     strain, sampling_rate = load_strain(FILE)
 
-    # Calculate P
-    frequencies, psd = calculate_psd(
-        strain,
-        sampling_rate
-    )
+    # Calculate PSD
+    frequencies, psd = calculate_psd(strain,sampling_rate)
 
     # Plot PSD
     plt.figure(figsize=(10, 5))

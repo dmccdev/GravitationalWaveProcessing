@@ -2,7 +2,7 @@ import h5py
 
 FILE = "data/raw/GW150914_H1.hdf5"
 
-def load_strain(path):
+def load_strain(path: str) -> tuple:
     with h5py.File(path, "r") as f:
         strain = f["strain/Strain"][:]
         duration = f["meta/Duration"][()]

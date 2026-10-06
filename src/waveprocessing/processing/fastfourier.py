@@ -7,13 +7,20 @@ from waveprocessing.processing.preprocessing import clean_strain
 
 FILE = "data/raw/GW150914_H1.hdf5"
 
+def calculate_fft(strain, sampling_rate):
+    # Calculate the complex fourier values
+    fast_fourier_transform = np.fft.rfft(strain)
+    
+    # Generate the corresponding frequency numpy array
+    frequencies = np.fft.rfftfreq(len(strain), d=1 / sampling_rate)
+
+    return fast_fourier_transform, frequencies
 
 def main():
     strain, sampling_rate = load_strain(FILE) #Get Strain Data
-    strain = clean_strain(strain)
+    strain = clean_strain(strain) #"Clean it" up
 
-    fast_fourier_transform = np.fft.rfft(strain) #Calculate FFT with numpy
-    frequencies = np.fft.rfftfreq(len(strain), 1 / sampling_rate) #Creating The frequency values
+    fast_fourier_transform, frequencies = calculate_fft(strain, sampling_rate)
 
     amplitude = np.abs(fast_fourier_transform) #Magnitude of complex numbers
 
