@@ -11,6 +11,7 @@ def load_strain(path: str) -> tuple:
 
     return strain, sampling_rate
 
-strain, sampling_rate = load_strain(FILE)
-print("Calculated Sampling rate is: ", sampling_rate, " Hz") #4096.0Hz
-print("Strain is: ", strain) #A long 1dim array
+if __name__ == "__main__":
+    strain, sampling_rate = load_strain(FILE)
+    print("Calculated Sampling rate is: ", sampling_rate, " Hz") #4096.0Hz
+    print("Strain is: ", strain) #A long 1dim array
