@@ -6,6 +6,7 @@ This project is currently unfinished and is still in development
 
 A Python project for processing and analysing gravitational wave detector data from publicly available LIGO experimental data.
 The goal is to build a "pipeline" that can process detector data and use signal processing and statistical methods to identify gravitational wave signals while removing signal noise.
+There are plans to add a user interface to easily navigate the plots and choose data sources.
 
 ## Current Progress
 
